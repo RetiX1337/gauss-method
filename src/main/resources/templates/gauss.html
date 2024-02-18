@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gauss Method</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Gauss Method</h1>
+    <form th:action="@{/gauss}" th:object="${matrixWrapper}" method="post">
+        <table>
+            <tr th:each="row, rowIndex : *{matrix}">
+                <td th:each="double, columnIndex : *{matrix[__${rowIndex.index}__]}">
+                    <input type="number" step="0.01" th:value="*{matrix[__${rowIndex.index}__][__${columnIndex.index}__]}"
+                           th:field="*{matrix[__${rowIndex.index}__][__${columnIndex.index}__]}"/>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div th:if="${result != null}" class="alert alert-success mt-3" role="alert">
+        The result is:
+        <div th:each="num, stat : ${result}">
+            <p th:text="${stat.count} + '. ' + ${num}"></p>
+        </div>
+    </div>
+    <div th:if="${error != null}" class="alert alert-success mt-3" role="alert">
+        The error is:
+        <div th:each="num, stat : ${error}">
+            <p th:text="${stat.count} + '. ' + ${num}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
