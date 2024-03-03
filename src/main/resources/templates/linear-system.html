@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Simple Iterations Method</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Simple Iterations Method</h1>
+  <form th:action="@{/linear-system}" method="post">
+    <label for="mParameter">Enter m Parameter:</label><br>
+    <input type="number" id="mParameter" name="mParameter" th:value="${mParameter}" required><br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div th:if="${result != null}" class="alert alert-success mt-3" role="alert">
+    The result is:
+    <div th:each="num, stat : ${result}">
+      <p th:text="${stat.count} + '. ' + ${num}"></p>
+    </div>
+  </div>
+  <img src="../images/img.png" alt="Linear System Image">
+</div>
+</body>
+</html>
