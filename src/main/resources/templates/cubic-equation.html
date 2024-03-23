@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cubic Equation Solver</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Cubic Equation Solver</h1>
+    <form th:object="${cubicEquationWrapper}" method="post">
+        <div class="form-group" th:each="multiplier, iterStat : *{cubicEquationMultipliers}">
+            <label th:for="${'multiplier' + iterStat.index}">Multiplier <span
+                    th:text="${iterStat.index}"></span></label>
+            <input type="number" step="0.01" class="form-control" th:id="${'multiplier' + iterStat.index}"
+                   th:field="*{cubicEquationMultipliers[__${iterStat.index}__]}">
+        </div>
+        <button type="submit" class="btn btn-primary">Solve</button>
+    </form>
+    <div th:if="${solution != null}">
+        <h2>Solution: <span th:text="${solution}"></span></h2>
+    </div>
+</div>
+</body>
+</html>
