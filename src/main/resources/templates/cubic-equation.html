@@ -7,12 +7,23 @@
 <body>
 <div class="container">
     <h1>Cubic Equation Solver</h1>
+    <div th:if="${exception != null}">
+        <p class="text-danger"><span th:text="${exception}"></span></p>
+    </div>
     <form th:object="${cubicEquationWrapper}" method="post">
         <div class="form-group" th:each="multiplier, iterStat : *{cubicEquationMultipliers}">
             <label th:for="${'multiplier' + iterStat.index}">Multiplier <span
                     th:text="${iterStat.index}"></span></label>
             <input type="number" step="0.01" class="form-control" th:id="${'multiplier' + iterStat.index}"
                    th:field="*{cubicEquationMultipliers[__${iterStat.index}__]}">
+        </div>
+        <div class="form-group">
+            <label th:for="intervalStart"><span>Interval Start</span></label>
+            <input type="number" step="0.01" class="form-control" th:id="intervalStart" th:field="*{intervalStart}"/>
+        </div>
+        <div class="form-group">
+            <label th:for="intervalEnd"><span>Interval End</span></label>
+            <input type="number" step="0.01" class="form-control" th:id="intervalEnd" th:field="*{intervalEnd}"/>
         </div>
         <button type="submit" class="btn btn-primary">Solve</button>
     </form>

@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 public class CubicEquationServiceImpl implements CubicEquationService {
     private static final double EPSILON = 1e-4;
 
-    public double solveDichotomy(final double[] multipliers) {
+    public double solveDichotomy(final double[] multipliers, final double intervalStart, final double intervalEnd) {
         double a = multipliers[0];
         double b = multipliers[1];
         double c = multipliers[2];
         double d = multipliers[3];
 
-        double left = -1000, right = 1000;
+        double left = intervalStart, right = intervalEnd;
+
+        if (f(a, b, c, d, left) * f(a, b, c, d, right) >= 0) {
+            throw new IllegalArgumentException("Incorrect interval");
+        }
+
         while (right - left > EPSILON) {
             double mid = left + (right - left) / 2;
             if (f(a, b, c, d, mid) * f(a, b, c, d, left) <= 0) {

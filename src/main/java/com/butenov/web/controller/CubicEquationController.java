@@ -30,8 +30,13 @@ public class CubicEquationController {
     @PostMapping
     public String postCubicEquation(@ModelAttribute("cubicEquationWrapper")
                                         final CubicEquationWrapper cubicEquationWrapper, final Model model) {
-        final double solution = cubicEquationService.solveDichotomy(cubicEquationWrapper.getCopy());
-        model.addAttribute("solution", solution);
+        try {
+            final double solution = cubicEquationService.solveDichotomy(cubicEquationWrapper.getMultipliersCopy(),
+                    cubicEquationWrapper.getIntervalStart(), cubicEquationWrapper.getIntervalEnd());
+            model.addAttribute("solution", solution);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("exception", e.getMessage());
+        }
         model.addAttribute(cubicEquationWrapper);
         return "cubic-equation";
     }
