@@ -18,8 +18,17 @@
         </div>
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
-    <div th:if="${result != null}" class="mt-3">
-        <h2>Solution: <span th:text="${result}"></span></h2>
+    <div th:if="${approximateFirstDegree != null}" class="mt-3">
+        <h2>First Degree Approximate: <span th:text="${approximateFirstDegree}"></span></h2>
+    </div>
+    <div th:if="${firstDegreeError != null}" class="mt-3">
+        <h2>First Degree Error: <span th:text="${firstDegreeError}"></span></h2>
+    </div>
+    <div th:if="${approximateSecondDegree != null}" class="mt-3">
+        <h2>Second Degree Approximate: <span th:text="${approximateSecondDegree}"></span></h2>
+    </div>
+    <div th:if="${secondDegreeError != null}" class="mt-3">
+        <h2>Second Degree Error: <span th:text="${secondDegreeError}"></span></h2>
     </div>
 </div>
 </body>
